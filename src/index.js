@@ -1,21 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   // your code here
-  document.getElementById("submit-form-btn").addEventListener("click", e => {
-    e.preventDefault();
-    createTodo();
-  });
+  document.querySelector("form").addEventListener("submit", function (event) {
+    value = document.getElementById('new-task-description').value
+    newItem = document.createElement('li');
+    newItem.innerText = `${value}`;
+    document.getElementById("tasks").appendChild(newItem);
+    event.preventDefault();
+    document.getElementById('new-task-description').value = ``;
+  })
 });
-
-function createTodo() {
-  let taskText = document.getElementById("new-task-description").value;
-  let newTask = document.createElement("li");
-  newTask.innerHTML =
-    taskText +
-    "&nbsp;" +
-    "<button class='delete' onclick='deleteTask(this)'>x</button>";
-  document.getElementById("tasks").appendChild(newTask);
-}
-
-function deleteTask(task) {
-  task.parentNode.remove();
-}
